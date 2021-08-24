@@ -3,12 +3,10 @@ var date = moment().format("MMM D YYYY").toUpperCase();
 var searchHistoryContainer = $("#history-container");
 var searchHistoryArr = [];
 var apiKey = "abb454b312b2fc3c31f23b45089c7b8b";
-// var lat;
-// var lon;
 
 getWeather = function (lat, lon) {
 
-    fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=hourly,minuetly&appid=' + apiKey)
+    fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=hourly,minutely&units=imperial&appid=' + apiKey)
         .then(function (response) {
             if (!response.ok) {
                 throw Error(response.statusText);
@@ -16,6 +14,10 @@ getWeather = function (lat, lon) {
             return response.json();
         }).then(function (response) {
             console.log(response);
+
+            populateWeatherData(response);
+
+
         }).catch(function (error) {
             console.log(error);
         });
@@ -36,13 +38,11 @@ getLocation = function (city) {
             var lat = response.coord.lat;
             var lon = response.coord.lon;
 
-            console.log(lat);
-            console.log(lon);
-
             getWeather(lat, lon);
 
         }).catch(function (error) {
             console.log(error);
+            alert('City not found!');
         });
 
 }
@@ -70,6 +70,27 @@ populateHistory = function () {
         searchHistoryContainer.append(cityEntry);
 
     })
+
+}
+
+populateWeatherData = function (weatherData) {
+
+    console.log(weatherData);
+
+    // CURRENT WEATHER INFORMATION
+    $('#icon').attr("src", "https://openweathermap.org/img/wn/" + weatherData.current.weather[0].icon + ".png");
+
+    $('#temp').text("TEMP : " + weatherData.current.temp);
+    $('#humidity').text("HUMI : " + weatherData.current.humidity);
+    $('#wind').text("WIND : " + weatherData.current.temp);
+    $('#uv').text("UV : " + weatherData.current.uvi);
+
+    // FORECAST
+    for (i = 0; i === 4; i++) {
+
+    }
+
+
 
 }
 
@@ -115,9 +136,8 @@ $(document).on('keypress', function (e) {
 
         }
 
-
-
     };
+
 
 });
 
