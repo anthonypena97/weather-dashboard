@@ -7,8 +7,17 @@ var apiKey = "abb454b312b2fc3c31f23b45089c7b8b";
 getWeather = function (city) {
 
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey)
-        .then(response => response.json())
-        .then(data => console.log(data));
+        .then(response => {
+            response.json();
+
+            // if bad response
+            if (response.status === 404) {
+                alert("city not found!");
+            }
+        }
+        )
+        .then(data => console.log(data))
+
 
 }
 
