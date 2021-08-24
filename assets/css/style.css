@@ -122,6 +122,11 @@ body {
     height: 50%;
 }
 
+.small-icon {
+    width:30%;
+    margin: auto;
+}
+
 /* ANIMATION */
 .fade-in-image{
 -webkit-animation: fadein 5s; /* Safari, Chrome and Opera > 12.1 */

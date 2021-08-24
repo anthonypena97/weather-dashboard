@@ -82,13 +82,43 @@ populateWeatherData = function (weatherData) {
 
     $('#temp').text("TEMP : " + weatherData.current.temp);
     $('#humidity').text("HUMI : " + weatherData.current.humidity);
-    $('#wind').text("WIND : " + weatherData.current.temp);
+    $('#wind').text("WIND : " + weatherData.current.wind_gust);
     $('#uv').text("UV : " + weatherData.current.uvi);
 
-    // FORECAST
-    for (i = 0; i === 4; i++) {
 
-    }
+    var forecastContainer = $("#forecastContainer");
+
+    // clears out previous elements
+    forecastContainer.html("");
+
+
+    // FORECAST
+    for (i = 0; i < 5; i++) {
+
+        var d = i + 1;
+        var day = moment().add(d, "days").format("MMM D YYYY").toUpperCase();
+
+        var forecastCard = $("<div>").addClass("forecast col")
+
+        var forecastDate = $("<div>").addClass("row").text(day)
+        forecastCard.append(forecastDate);
+
+        var forecastIcon = $("<img>").addClass("row small-icon").attr("src", "https://openweathermap.org/img/wn/" + weatherData.daily[i].weather[0].icon + ".png")
+
+        forecastCard.append(forecastIcon);
+
+        var forecastTemp = $("<div>").addClass("row").text("TEMP : " + weatherData.daily[i].temp.max)
+        forecastCard.append(forecastTemp);
+
+        var forecastWind = $("<div>").addClass("row").text("WIND : " + weatherData.daily[i].wind_gust)
+        forecastCard.append(forecastWind);
+
+        var forecastHumi = $("<div>").addClass("row").text("HUMI : " + weatherData.daily[i].humidity)
+        forecastCard.append(forecastHumi);
+
+        forecastContainer.append(forecastCard)
+
+    };
 
 
 
