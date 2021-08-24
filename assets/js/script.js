@@ -1,8 +1,10 @@
 var searchBox = $('#city-search-box')
 var date = moment().format("MMM D YYYY").toUpperCase();
 var searchHistoryContainer = $("#history-container");
-var searchHistoryArr = [];
+var clearHistory = $('#searchHistoryButton');
 var apiKey = "abb454b312b2fc3c31f23b45089c7b8b";
+var searchHistoryArr = JSON.parse(localStorage.getItem('weather-dashboard')) || [];
+
 
 getWeather = function (lat, lon) {
 
@@ -25,6 +27,9 @@ getWeather = function (lat, lon) {
 };
 
 getLocation = function (city) {
+
+    $('#city-display').text(city);
+
 
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey)
         .then(function (response) {
@@ -55,21 +60,48 @@ currentDay = function () {
 
 loadSearchHistory = function () {
 
+    populateHistory();
+
 };
 
 populateHistory = function () {
 
-    searchHistoryContainer.html('');
+    if (searchHistoryArr.length === 0) {
 
-    $.each(searchHistoryArr, function (i) {
+        searchHistoryContainer.html("<div>Search History...</div>")
 
-        var cityName = searchHistoryArr[i].city + ",";
+    } else {
 
-        var cityEntry = $('<div>').addClass("city").text(cityName);
+        searchHistoryContainer.html('');
 
-        searchHistoryContainer.append(cityEntry);
+        $.each(searchHistoryArr, function (i) {
 
-    })
+            var citySelected = searchHistoryArr[i].city.replace(/\s+/g, '');
+            console.log(citySelected);
+
+            var cityName = searchHistoryArr[i].city + ",";
+
+            var cityEntry = $('<div>').addClass("city").attr("id", citySelected).text(cityName);
+
+            searchHistoryContainer.append(cityEntry);
+
+            var saveBtn = document.querySelector("#" + citySelected)
+            saveBtn.addEventListener("click", function (event) {
+
+                // saveText(event.target.id);
+
+                console.log(citySelected.replace(/\s+/g, ''));
+
+                currentDay();
+
+                getLocation(searchHistoryArr[i].city)
+
+            })
+
+
+        })
+
+    }
 
 }
 
@@ -176,3 +208,17 @@ searchBox.on("click", function () {
     searchBox.attr("placeholder", "")
 
 });
+
+clearHistory.on("click", function () {
+
+    console.log("clear history");
+
+    searchHistoryArr = [];
+
+    localStorage.setItem('weather-dashboard', JSON.stringify(searchHistoryArr));
+
+    populateHistory();
+
+});
+
+loadSearchHistory();

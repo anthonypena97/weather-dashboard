@@ -127,6 +127,25 @@ body {
     margin: auto;
 }
 
+.clear-history-container{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.clear-history {
+    background-color: blue;
+    border-radius: 15px;
+    font-size: 1vw;
+}
+
+.clear-history:hover {
+    background-color: rgb(83, 83, 223);
+    border-radius: 15px;
+    font-size: 1vw;
+}
+
 /* ANIMATION */
 .fade-in-image{
 -webkit-animation: fadein 5s; /* Safari, Chrome and Opera > 12.1 */
