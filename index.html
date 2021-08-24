@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
+
+    <title>WEATHER DASHBOARD</title>
+</head>
+
+<body>
+
+    <main class="main">
+        <div class="dashboard">
+            <div class="weather-container">
+                <div class="container boxes">
+
+                    <!-- DASHBOARD TITLE -->
+
+                    <div id="header">
+                        <h1 class="title">WEATHER DASHBOARD</h1>
+                    </div>
+
+                    <!-- SEARCH ROW -->
+
+                    <div class="search-container row boxes">
+                        <div id="city-search" class="col borders">
+                            <input id="city-search-box" class="city-search" placeholder="Search by city..."></input>
+                        </div>
+                        <div id="search-history" class="col borders history">
+                            <!-- <p class="history-text">BALTIMORE, AUSTIN, LAS VEGAS, LOS ANGELES</p> -->
+                            <div id="history-container" class="history-text">
+
+                                <div>Search History...</div>
+
+                                <!-- <div class="city">AUSTIN,</div>
+                                <div class="city">AUSTIN,</div>
+                                <div class="city">AUSTIN,</div>
+                                <div class="city">AUSTIN,</div>
+                                <div class="city">AUSTIN,</div>
+                                <div class="city">AUSTIN,</div>
+                                <div class="city">AUSTIN,</div> 
+                                <div class="city">AUSTIN,</div>
+                                <div class="city">AUSTIN,</div>
+                                <div class="city">AUSTIN,</div>
+                                <div class="city">AUSTIN,</div>
+                                <div class="city">last,</div> -->
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <!-- CURRENT WEATHER INFORMATION -->
+
+                    <div class="weather-info-container row borders boxes">
+                        <div class="weather-status col center">
+                            <div id="city-display" class="row">&#0020;</div>
+                            <div class="row">
+                                <img src="https://openweathermap.org/img/wn/01d.png" style="width:20%;">
+                            </div>
+                            <div id="date" class="row">&#0020;</div>
+                        </div>
+
+                        <div class="weather-info col">
+
+                            <div class="row weather-info">
+                                <div class="col">TEMP</div>
+                                <div class="col">HUMI</div>
+                            </div>
+
+                            <div class="row weather-info">
+                                <div class="col">WIND</div>
+                                <div class="col">UV</div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- FUTURE WEATHER INFORMATION -->
+
+                    <div class="forecast-container row borders boxes center">
+
+                        <div class="forecast col">
+                            <div class="row">AUG 23 2021</div>
+                            <div class="row">
+                                <img class="row" src="https://openweathermap.org/img/wn/01n.png" style="width:30%;">
+                            </div>
+                            <div class="row">TEMP</div>
+                            <div class="row">WIND</div>
+                            <div class="row">HUMI</div>
+                        </div>
+
+                        <div class="forecast col">
+                            <div class="row">AUG 23 2021</div>
+                            <div class="row">
+                                <img class="row" src="https://openweathermap.org/img/wn/01n.png" style="width:30%;">
+                            </div>
+                            <div class="row">TEMP</div>
+                            <div class="row">WIND</div>
+                            <div class="row">HUMI</div>
+                        </div>
+
+                        <div class="forecast col">
+                            <div class="row">AUG 23 2021</div>
+                            <div class="row">
+                                <img class="row" src="https://openweathermap.org/img/wn/01n.png" style="width:30%;">
+                            </div>
+                            <div class="row">TEMP</div>
+                            <div class="row">WIND</div>
+                            <div class="row">HUMI</div>
+                        </div>
+
+                        <div class="forecast col">
+                            <div class="row">AUG 23 2021</div>
+                            <div class="row">
+                                <img class="row" src="https://openweathermap.org/img/wn/01n.png" style="width:30%;">
+                            </div>
+                            <div class="row">TEMP</div>
+                            <div class="row">WIND</div>
+                            <div class="row">HUMI</div>
+                        </div>
+
+                        <div class="forecast col">
+                            <div class="row">AUG 23 2021</div>
+                            <div class="row">
+                                <img class="row" src="https://openweathermap.org/img/wn/01n.png" style="width:30%;">
+                            </div>
+                            <div class="row">TEMP</div>
+                            <div class="row">WIND</div>
+                            <div class="row">HUMI</div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
