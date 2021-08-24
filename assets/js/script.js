@@ -3,21 +3,47 @@ var date = moment().format("MMM D YYYY").toUpperCase();
 var searchHistoryContainer = $("#history-container");
 var searchHistoryArr = [];
 var apiKey = "abb454b312b2fc3c31f23b45089c7b8b";
+// var lat;
+// var lon;
 
-getWeather = function (city) {
+getWeather = function (lat, lon) {
+
+    fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=hourly,minuetly&appid=' + apiKey)
+        .then(function (response) {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            }
+            return response.json();
+        }).then(function (response) {
+            console.log(response);
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+};
+
+getLocation = function (city) {
 
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey)
-        .then(response => {
-            response.json();
-
-            // if bad response
-            if (response.status === 404) {
-                alert("city not found!");
+        .then(function (response) {
+            if (!response.ok) {
+                throw Error(response.statusText);
             }
-        }
-        )
-        .then(data => console.log(data))
+            return response.json();
+        }).then(function (response) {
+            console.log(response);
 
+            var lat = response.coord.lat;
+            var lon = response.coord.lon;
+
+            console.log(lat);
+            console.log(lon);
+
+            getWeather(lat, lon);
+
+        }).catch(function (error) {
+            console.log(error);
+        });
 
 }
 
@@ -85,7 +111,7 @@ $(document).on('keypress', function (e) {
 
             saveSearch(cityChosen);
 
-            getWeather(cityChosen);
+            getLocation(cityChosen);
 
         }
 
