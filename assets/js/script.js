@@ -2,6 +2,15 @@ var searchBox = $('#city-search-box')
 var date = moment().format("MMM D YYYY").toUpperCase();
 var searchHistoryContainer = $("#history-container");
 var searchHistoryArr = [];
+var apiKey = "abb454b312b2fc3c31f23b45089c7b8b";
+
+getWeather = function (city) {
+
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey)
+        .then(response => response.json())
+        .then(data => console.log(data));
+
+}
 
 currentDay = function () {
 
@@ -18,8 +27,6 @@ populateHistory = function () {
     searchHistoryContainer.html('');
 
     $.each(searchHistoryArr, function (i) {
-
-        console.log(searchHistoryArr[i]);
 
         var cityName = searchHistoryArr[i].city + ",";
 
@@ -41,10 +48,7 @@ saveSearch = function (cityChosen) {
 
     localStorage.setItem('weather-dashboard', JSON.stringify(searchHistoryArr));
 
-    console.log(searchHistoryArr);
-
     populateHistory();
-
 
 }
 
@@ -71,6 +75,8 @@ $(document).on('keypress', function (e) {
             currentDay();
 
             saveSearch(cityChosen);
+
+            getWeather(cityChosen);
 
         }
 
