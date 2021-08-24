@@ -15,7 +15,6 @@ getWeather = function (lat, lon) {
             }
             return response.json();
         }).then(function (response) {
-            console.log(response);
 
             populateWeatherData(response);
 
@@ -38,7 +37,6 @@ getLocation = function (city) {
             }
             return response.json();
         }).then(function (response) {
-            console.log(response);
 
             var lat = response.coord.lat;
             var lon = response.coord.lon;
@@ -77,7 +75,6 @@ populateHistory = function () {
         $.each(searchHistoryArr, function (i) {
 
             var citySelected = searchHistoryArr[i].city.replace(/\s+/g, '');
-            console.log(citySelected);
 
             var cityName = searchHistoryArr[i].city + ",";
 
@@ -87,10 +84,6 @@ populateHistory = function () {
 
             var saveBtn = document.querySelector("#" + citySelected)
             saveBtn.addEventListener("click", function (event) {
-
-                // saveText(event.target.id);
-
-                console.log(citySelected.replace(/\s+/g, ''));
 
                 currentDay();
 
@@ -106,8 +99,6 @@ populateHistory = function () {
 }
 
 populateWeatherData = function (weatherData) {
-
-    console.log(weatherData);
 
     // CURRENT WEATHER INFORMATION
     $('#icon').attr("src", "https://openweathermap.org/img/wn/" + weatherData.current.weather[0].icon + ".png");
@@ -210,8 +201,6 @@ searchBox.on("click", function () {
 });
 
 clearHistory.on("click", function () {
-
-    console.log("clear history");
 
     searchHistoryArr = [];
 
