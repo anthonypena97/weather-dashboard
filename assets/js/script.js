@@ -130,6 +130,24 @@ populateWeatherData = function (weatherData) {
     $('#uv').text("UV : " + weatherData.current.uvi);
 
 
+    console.log(weatherData.current.uvi);
+
+    // UV INDEX COLOR
+    if (weatherData.current.uvi >= 3 && weatherData.current.uvi <= 6) {
+
+        $('#uv').addClass("orange");
+
+    } else if (weatherData.current.uvi >= 6) {
+
+        $('#uv').addClass("red");
+
+    } else {
+
+        $('#uv').addClass("green");
+
+    }
+
+
     var forecastContainer = $("#forecastContainer");
 
     // clears out previous elements
