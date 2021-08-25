@@ -13,7 +13,7 @@ This app uses brower's local storage.
 
 ## Description
 
-A user is given time blocks for the work day. The time blocks indicate wether the time is in the past, present or future. A user may write and save tasks or events into each time block.
+A user may search a city's current weather information. A 5 day forecast is also displayed. One may use the search history to recall a city's weather data.
 
 ## Getting Started
 
