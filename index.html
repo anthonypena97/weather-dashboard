@@ -19,7 +19,7 @@
 
 <body>
 
-    <main class="main">
+    <main class="main fade-in-image">
         <div class="dashboard">
             <div class="weather-container">
                 <div class="container boxes">
@@ -32,19 +32,14 @@
 
                     <!-- SEARCH ROW -->
 
-                    <div class="search-container row boxes">
-                        <div id="city-search" class="col borders">
-                            <input id="city-search-box" class="city-search" placeholder="Search by city..."></input>
+                    <div class="search-container boxes">
+                        <div id="city-search" class="city-search borders">
+                            <input id="city-search-box" class="city-search-input"
+                                placeholder="Search by city..."></input>
                         </div>
-                        <div id="search-history" class="col borders history">
-                            <!-- <p class="history-text">BALTIMORE, AUSTIN, LAS VEGAS, LOS ANGELES</p> -->
-                            <div id="history-container" class="history-text">
+                        <div id="search-history" class="borders city-history">
 
-                                <div>Search History...</div>
-
-
-                            </div>
-
+                            <div>Search History...</div>
 
                         </div>
                     </div>
@@ -82,6 +77,17 @@
 
                     <div class="clear-history-container">
                         <button id="searchHistoryButton" class="clear-history">CLEAR HISTORY</button>
+                    </div>
+
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p>CITY NOT FOUND</p>
+                        </div>
+
                     </div>
 
                 </div>

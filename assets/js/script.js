@@ -1,12 +1,30 @@
 var searchBox = $('#city-search-box')
 var date = moment().format("MMM D YYYY").toUpperCase();
-var searchHistoryContainer = $("#history-container");
+var searchHistoryContainer = $("#search-history");
 var clearHistory = $('#searchHistoryButton');
 var apiKey = "abb454b312b2fc3c31f23b45089c7b8b";
 var searchHistoryArr = JSON.parse(localStorage.getItem('weather-dashboard')) || [];
+var cityTitle = "";
 
+// FUNCTION FOR ADDING SEARCH ONTO SEARCH HISTORY ARRAY
+saveSearch = function (cityChosen) {
 
-getWeather = function (lat, lon) {
+    var citySearched = {
+        city: cityChosen
+    }
+
+    searchHistoryArr.push(citySearched);
+
+    localStorage.setItem('weather-dashboard', JSON.stringify(searchHistoryArr));
+
+    populateHistory();
+
+}
+
+// LON AND LAT ARE PASSED INTO OPEN WEATHER API
+getWeather = function (lat, lon, city) {
+
+    $('#city-display').text(city);
 
     fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=hourly,minutely&units=imperial&appid=' + apiKey)
         .then(function (response) {
@@ -17,7 +35,7 @@ getWeather = function (lat, lon) {
         }).then(function (response) {
 
             populateWeatherData(response);
-
+            currentDay();
 
         }).catch(function (error) {
             console.log(error);
@@ -25,9 +43,8 @@ getWeather = function (lat, lon) {
 
 };
 
+// GETS LON AND LAT FROM CITY CHOSEN
 getLocation = function (city) {
-
-    $('#city-display').text(city);
 
 
     fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey)
@@ -41,27 +58,30 @@ getLocation = function (city) {
             var lat = response.coord.lat;
             var lon = response.coord.lon;
 
-            getWeather(lat, lon);
+            getWeather(lat, lon, city);
 
         }).catch(function (error) {
             console.log(error);
-            alert('City not found!');
+            modal.style.display = "block";
         });
 
 }
 
+// FUNCTION FOR FETCHING CURRENT DAY USING MOMENT.JS
 currentDay = function () {
 
     $('#date').text(date);
 
 }
 
+// FUNCTION FOR LOADING PREVIOUS SEARCHES FROM LOCAL STORAGE
 loadSearchHistory = function () {
 
     populateHistory();
 
 };
 
+// FUNCTION FOR PARSING PREVIOUS SEARCH HISTORY ONTO PAGE
 populateHistory = function () {
 
     if (searchHistoryArr.length === 0) {
@@ -98,6 +118,7 @@ populateHistory = function () {
 
 }
 
+// FUNCTION FOR PARSING API RESPONSE ONTO PAGE
 populateWeatherData = function (weatherData) {
 
     // CURRENT WEATHER INFORMATION
@@ -105,7 +126,7 @@ populateWeatherData = function (weatherData) {
 
     $('#temp').text("TEMP : " + weatherData.current.temp);
     $('#humidity').text("HUMI : " + weatherData.current.humidity);
-    $('#wind').text("WIND : " + weatherData.current.wind_gust);
+    $('#wind').text("WIND : " + weatherData.current.wind_speed);
     $('#uv').text("UV : " + weatherData.current.uvi);
 
 
@@ -147,41 +168,27 @@ populateWeatherData = function (weatherData) {
 
 }
 
-saveSearch = function (cityChosen) {
-
-    var citySearched = {
-        city: cityChosen
-    }
-
-    searchHistoryArr.push(citySearched);
-
-    localStorage.setItem('weather-dashboard', JSON.stringify(searchHistoryArr));
-
-    populateHistory();
-
-}
-
 // PRESSING ENTER FOR CITY SEARCH
 $(document).on('keypress', function (e) {
     if (e.which == 13) {
 
         if (searchBox.val() === "") {
 
-            alert("type proper city!");
+            modal.style.display = "block";
 
         } else {
 
-            $("#city-display").text("");
+            // $("#city-display").text("");
 
             var cityChosen = searchBox.val().toUpperCase();
 
-            $("#city-display").text(cityChosen);
+            cityTitle = cityChosen;
+
+            // $("#city-display").text(cityChosen);
 
             searchBox.val("");
 
             searchBox.attr("placeholder", "Search by city..");
-
-            currentDay();
 
             saveSearch(cityChosen);
 
@@ -194,12 +201,14 @@ $(document).on('keypress', function (e) {
 
 });
 
+// EVENT LISTENER FOR CLEARING SEARCH INPUT WHEN TYPING
 searchBox.on("click", function () {
 
     searchBox.attr("placeholder", "")
 
 });
 
+// EVENT LISTENER FOR CLEARING STORAGE/ARRAY/HISTORY DOM ELEMENTS
 clearHistory.on("click", function () {
 
     searchHistoryArr = [];
@@ -209,5 +218,23 @@ clearHistory.on("click", function () {
     populateHistory();
 
 });
+
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function () {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
 
 loadSearchHistory();
