@@ -262,7 +262,7 @@ body {
 
 
 /* MACBOOK SCREEN */
-@media screen and (min-width: 1439px) { 
+@media screen and (min-width: 600px) { 
 
     * {
         font-size: 2vw;
