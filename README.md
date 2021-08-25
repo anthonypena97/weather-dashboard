@@ -1,7 +1,7 @@
 # Weather Dashboard
 ### A Dashboard for Weather across multiple cities
 
-![WEATHER-DASHBOARD-DEMO](https://user-images.githubusercontent.com/79285555/130727312-f72dc4b1-57ac-4bd1-9c47-fc308c8baaca.gif)
+![WEATHER-DASHBOARD-DEMO](https://user-images.githubusercontent.com/79285555/130727612-2d225e4c-eb12-45e7-85ff-79d762d7b4d1.gif)
 
 <p> ---------------------------------------- </p>
 
